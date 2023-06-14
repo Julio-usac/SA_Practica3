@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar Repositorio') {
+            steps {
+                git 'https://github.com/Julio-usac/SA_Practica3'
+            }
+        }
+
+        stage('Instalar Dependencias') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Construir Artefactos') {
+            steps {
+                sh 'tar -czf esb.tar.gz esb-server'
+                sh 'tar -czf log.tar.gz log-server'
+                sh 'tar -czf cliente.tar.gz cliente-server'
+                sh 'tar -czf resturante.tar.gz resturante-server'
+                sh 'tar -czf repartidor.tar.gz repartidor-server'
+            }
+        }
+
+        stage('Archivar Artefactos') {
+            steps {
+                archiveArtifacts artifacts: 'esb.tar.gz', fingerprint: true
+                archiveArtifacts artifacts: 'log.tar.gz', fingerprint: true
+                archiveArtifacts artifacts: 'cliente.tar.gz', fingerprint: true
+                archiveArtifacts artifacts: 'resturante.tar.gz', fingerprint: true
+                archiveArtifacts artifacts: 'repartidor.tar.gz', fingerprint: true
+            }
+        }
+    }
+}
