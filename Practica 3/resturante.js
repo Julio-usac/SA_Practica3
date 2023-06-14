@@ -18,7 +18,7 @@ app.get("/", function (req, res) {
 
 app.post("/recibir", function (req, res) {
   var descripcion = "Se recibio la orden con id: "+ req.body.id
-  axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
   pedido[cont]=req.body.id
   cont=cont + 1
   res.send("recibido")
@@ -27,23 +27,23 @@ app.post("/recibir", function (req, res) {
 app.get("/estado/:orden",body_parser, function (req, res) {
   var orden = req.params.orden
   var descripcion = "Se recibio orden: "+ orden +" para conocer su estado"
-  axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
   var num= Math.floor(Math.random() * (3-1)+1)
   switch (num) {
     case 3:
       var des= "Se ingreso la orden con id: "+orden
-      axios.post('http://localhost:3003/log',{'descripcion':des})
+      axios.post('http://localhost:3005/log',{'descripcion':des})
       res.send("orden: "+orden+" ingresando");
       break;
     case 2:
       var des= "Orden en preparacion con id: "+orden
-      axios.post('http://localhost:3003/log',{'descripcion':des})
+      axios.post('http://localhost:3005/log',{'descripcion':des})
       res.send("orden: "+orden+" preparando")
       break;
     case 1:
       var des= "Se cancelo la orden con id: "+orden
-      axios.post('http://localhost:3003/log',{'descripcion':des})
-      axios.post('http://localhost:3002/recibir',{'orden':orden})
+      axios.post('http://localhost:3005/log',{'descripcion':des})
+      axios.post('http://localhost:3005/recibir',{'orden':orden})
       res.send("orden: "+orden+" cancelada")
       break;
   }
