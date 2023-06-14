@@ -18,24 +18,24 @@ app.get("/", function (req, res) {
 app.post("/recibir", function (req, res) {
   var orden = req.body.orden
   var descripcion = "Repartidor recibio la orden con id: "+orden
-  axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
   res.send("recibido")
 });
 
 app.get("/estado/:orden",body_parser, function (req, res) {
   var orden = req.params.orden
   var descripcion = "Se recibio orden: "+ orden +" para conocer su estado"
-  axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
   var num= Math.floor(Math.random() * (3-1)+1)
   switch (num) {
     case 1:
       var des= "Orden en camino con id: "+orden
-      axios.post('http://localhost:3003/log',{'descripcion':des})
+      axios.post('http://localhost:3005/log',{'descripcion':des})
       res.send("orden: "+orden+" en camino")
       break;
     case 2:
       var des= "Orden entregada con id: "+orden
-      axios.post('http://localhost:3003/log',{'descripcion':des})
+      axios.post('http://localhost:3005/log',{'descripcion':des})
       res.send("orden: "+orden+" entregada")
       break;
   }
