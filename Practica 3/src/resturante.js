@@ -13,15 +13,15 @@ const port = 3001;
 var pedido=[];
 cont=0;
 app.get("/", function (req, res) {
-  res.send("Servidor restaurante");
+  res.json("Servidor restaurante");
 });
 
 app.post("/recibir", function (req, res) {
   var descripcion = "Se recibio la orden con id: "+ req.body.id
-  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
+  //axios.post('http://localhost:3005/log',{'descripcion':descripcion})
   pedido[cont]=req.body.id
   cont=cont + 1
-  res.send("recibido")
+  res.json("recibido")
 });
 
 app.get("/estado/:orden",body_parser, function (req, res) {
@@ -50,6 +50,8 @@ app.get("/estado/:orden",body_parser, function (req, res) {
 });
 
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
+
+module.exports  = server;

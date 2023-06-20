@@ -12,14 +12,14 @@ app.use(express.json({ limit: "5mb", extended: true }));
 const port = 3002;
 
 app.get("/", function (req, res) {
-  res.send("Servidor repartidor");
+  res.json("Servidor repartidor");
 });
 
 app.post("/recibir", function (req, res) {
   var orden = req.body.orden
   var descripcion = "Repartidor recibio la orden con id: "+orden
-  axios.post('http://localhost:3005/log',{'descripcion':descripcion})
-  res.send("recibido")
+ // axios.post('http://localhost:3005/log',{'descripcion':descripcion})
+  res.json("recibido")
 });
 
 app.get("/estado/:orden",body_parser, function (req, res) {
@@ -41,6 +41,8 @@ app.get("/estado/:orden",body_parser, function (req, res) {
   }
 });
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
+
+module.exports  = server;
