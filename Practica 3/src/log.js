@@ -3,8 +3,6 @@ const app = express();
 const cors = require("cors");
 const moment = require('moment');
 require('moment-timezone');
-const axios = require('axios');
-var body_parser = require ('body-parser').json();
 const fs = require('fs');
 
 app.use(cors());
@@ -13,7 +11,7 @@ app.use(express.json({ limit: "5mb", extended: true }));
 const port = 3003;
 
 app.get("/", function (req, res) {
-  res.send("Log");
+  res.json("Log");
 });
 
 app.post("/log", function (req, res) {
@@ -28,9 +26,11 @@ app.post("/log", function (req, res) {
       console.log('Contenido agregado correctamente al archivo.');
     }
   });
-  res.send("listo")
+  res.json("listo")
 });
 
-app.listen(port, () => {
+let server = app.listen(port, () => {
   console.log(`listening at http://localhost:${port}`);
 });
+
+module.exports  = server;
