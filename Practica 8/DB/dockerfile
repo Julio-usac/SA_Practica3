@@ -1,0 +1,8 @@
+
+FROM mysql:latest
+
+ENV MYSQL_ROOT_PASSWORD password
+ENV MYSQL_DATABASE mysqldb
+ENV MYSQL_TCP_PORT 4000
+EXPOSE 4000
+COPY ./database_users.sql /docker-entrypoint-initdb.d/
