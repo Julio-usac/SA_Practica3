@@ -1,0 +1,11 @@
+FROM node:15-alpine
+ENV MYSQL_DATABASE mysqldb
+ENV MYSQL_USER root
+ENV MYSQL_PASSWORD password
+ENV MYSQL_HOST mysql
+WORKDIR /NodeJs
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 80
+CMD ["npm", "start"]
