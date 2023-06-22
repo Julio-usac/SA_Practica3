@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+      
+  mysql:
+    build: ./DB/
+    restart: always
+    ports:
+      - "4000:4000"
+  
+  nodeserver:
+    build: ./NodeJs
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - mysql
